@@ -17,7 +17,7 @@ app = Flask(__name__)
 
 
 #TODO
-DATABASEURI = "postgresql://username:password@[ip]]:[port]/[name]"
+DATABASEURI = "postgresql://dl3664:815578@34.148.223.31:5432/proj1part2"
 
 
 engine = create_engine(DATABASEURI)
