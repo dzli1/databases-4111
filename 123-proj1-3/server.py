@@ -51,16 +51,46 @@ def search():
             return f"An error occurred: {e}"
 
     return render_template("search.html")
-
+playlist_counter = 16
 @app.route("/create_playlist", methods=["GET", "POST"])
 def create_playlist():
+    global playlist_counter
     if request.method == "POST":
-        # Handle playlist creation logic here
-        # For now, we can just render a confirmation page
-        return render_template("playlist_created.html")
+        user_id = request.form.get("user_id")
+        title = request.form.get("title")
+        creator = request.form.get("creator")
+        
+        new_playlist_id = playlist_counter
+        playlist_counter += 1
+        
+        insert_query = """
+        INSERT INTO playlists (playlist_id, user_id, title, creator, number_of_songs)
+        VALUES (:playlist_id, :user_id, :title, :creator, :number_of_songs)
+        """
 
-    #If GET request, render the create plsylist page
-    return render_template("create_playlist.html")
+        params = {
+            "playlist_id": new_playlist_id,
+            "user_id": int(user_id),
+            "title": title,
+            "creator": creator,
+            "number_of_songs": 0
+        }
+        
+        try:
+            conn.execute(text(insert_query), params)
+            # query = text("SELECT * FROM playlists")
+            # result = conn.execute(query)
+            # rows = result.fetchall()
+            # for row in rows:
+            #     print(row)
+
+
+        except Exception as e:
+            #print("Error during insertion:", e)
+            return render_template("index.html")
+        return render_template("playlist_created.html", playlist_id=new_playlist_id)
+    user_id = request.args.get("user_id", "")
+    return render_template("create_playlist.html", user_id=user_id)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():

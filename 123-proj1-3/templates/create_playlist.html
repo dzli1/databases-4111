@@ -2,13 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Playlist Created</title>
+    <title>Create New Playlist</title>
 </head>
 <body>
-    <h1>Your playlist has been created!</h1>
-    
-    <a href="/">Back to Home</a>
+    <h1>Create a New Playlist</h1>
+    <form action="/create_playlist" method="POST">
+        <label for="user_id">User ID:</label><br>
+        <input type="text" name="user_id" id="user_id" value="{{ user_id }}"><br><br>
+        
+        <input type="hidden" name="number_of_songs" value="0">
+        
+        <label for="title">Playlist Title:</label><br>
+        <input type="text" name="title" id="title"><br><br>
+        
+        <label for="creator">Creator:</label><br>
+        <input type="text" name="creator" id="creator"><br><br>
+        
+        <input type="submit" value="Create Playlist">
+    </form>
 </body>
 </html>
-
