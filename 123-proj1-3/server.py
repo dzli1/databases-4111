@@ -15,17 +15,15 @@ app.secret_key = 'your_secret_key'
 
 @app.route("/")
 def index():
-    return render_template("index.html")  # Homepage
+    return render_template("index.html")
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
     if request.method == "POST":
-        # Get the search term from the form
         title = request.form.get("title")
         artist = request.form.get("artist")
         genre = request.form.get("genre")
 
-        # SQL query to search for songs based on input
         query = """
         SELECT s.song_id, s.title, a.name as artist_name, g.name as genre_name, 
         s.duration, s.release_date, s.number_of_streams, al.title as album_name
@@ -52,7 +50,6 @@ def search():
         except Exception as e:
             return f"An error occurred: {e}"
 
-    # If GET request, render the search form page
     return render_template("search.html")
 
 @app.route("/create_playlist", methods=["GET", "POST"])
@@ -62,16 +59,14 @@ def create_playlist():
         # For now, we can just render a confirmation page
         return render_template("playlist_created.html")
 
-    # If GET request, show the create playlist form
+    #If GET request, render the create plsylist page
     return render_template("create_playlist.html")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        # Get the user_id from the form
         user_id = request.form.get("user_id")
 
-        # Check if the user_id exists in the song_recommendation table
         check_query = """
         SELECT 1
         FROM song_recommendation
@@ -85,8 +80,7 @@ def login():
 
             if not user_exists:
                 return render_template("user_not_found.html")
-
-            # If the user exists, fetch the recommended song
+            
             query = """
             SELECT s.song_id, s.title, a.name as artist_name, g.name as genre_name, 
                    s.duration, s.release_date, sr.recommendation_score
@@ -101,7 +95,7 @@ def login():
 
             params = {"user_id": user_id}
             result = conn.execute(text(query), params)
-            recommended_song = result.fetchone()  # Get the recommended song
+            recommended_song = result.fetchone()
 
             if recommended_song:
                 return render_template("recommended_song.html", song=recommended_song)
