@@ -1,5 +1,7 @@
 Databases Project Part 3
+
 David Li	dl3664
+
 Kevin Wang	kjw2169
 
 We implemented the search for song, create playlist, and song recommendation functions. We were not able to implement the listening history, as it was not feasible to have users actually "listen" to songs on our webpage.
