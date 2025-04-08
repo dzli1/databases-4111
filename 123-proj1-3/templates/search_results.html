@@ -7,30 +7,36 @@
 </head>
 <body>
     <h1>Search Results</h1>
-    {% if songs %}
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Song ID</th>
-                    <th>Title</th>
-                    <th>Artist</th>
-                    <th>Genre</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for song in songs %}
-                    <tr>
-                        <td>{{ song.song_id }}</td>
-                        <td>{{ song.title }}</td>
-                        <td>{{ song.artist_name }}</td>
-                        <td>{{ song.genre_name }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <p>No results found.</p>
-    {% endif %}
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Song Title</th>
+                <th>Artist</th>
+                <th>Genre</th>
+                <th>Duration</th>
+                <th>Release Date</th>
+                <th>Streams (Millions)</th>
+                <th>Album</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for song in songs %}
+            <tr>
+                <td>{{ song.title }}</td>
+                <td>{{ song.artist_name }}</td>
+                <td>{{ song.genre_name }}</td>
+                <td>{{ song.duration }}</td>
+                <td>{{ song.release_date }}</td>
+                <td>{{ song.number_of_streams }}</td>
+                <td>{{ song.album_name }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <br><br>
+    <a href="/search">Back to Search</a>
 </body>
 </html>
 

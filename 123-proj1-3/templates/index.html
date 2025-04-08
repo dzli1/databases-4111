@@ -3,25 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Song Search</title>
+    <title>Welcome to the Music App</title>
 </head>
 <body>
-    <h1>Welcome to the Song Search App</h1>
-    <form action="/search" method="POST">
-        <label for="title">Song Title:</label>
-        <input type="text" name="title" id="title">
-        <br><br>
-        
-        <label for="artist">Artist:</label>
-        <input type="text" name="artist" id="artist">
-        <br><br>
+    <h1>Welcome to the Music App</h1>
 
-        <label for="genre">Genre:</label>
-        <input type="text" name="genre" id="genre">
-        <br><br>
+    <div>
+        <!-- Button to search for songs -->
+        <a href="{{ url_for('search') }}">
+            <button>Search for Songs</button>
+        </a>
+    </div>
+    <br>
 
-        <button type="submit">Search</button>
-    </form>
+    <div>
+        <!-- Button to create a playlist -->
+        <a href="{{ url_for('create_playlist') }}">
+            <button>Create a Playlist</button>
+        </a>
+    </div>
+    <br>
+
+    <div>
+        <!-- Button to login as user -->
+        <a href="{{ url_for('login') }}">
+            <button>Login as User</button>
+        </a>
+    </div>
+
 </body>
 </html>
 
